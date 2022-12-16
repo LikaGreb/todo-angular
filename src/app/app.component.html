@@ -1,0 +1,7 @@
+<app-header [(logout)]="logout"></app-header>
+<app-todo *ngIf="isAuth"></app-todo>
+<app-auth *ngIf="!isAuth"></app-auth>
+<div></div>
+<app-footer></app-footer>
+
+<router-outlet></router-outlet>

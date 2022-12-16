@@ -1,0 +1,11 @@
+:host{
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 60px 1fr 60px;
+}
+:host header, :host footer{
+  height: 60px;
+}
+:host:last-child{
+  display: none
+}

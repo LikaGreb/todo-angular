@@ -1,0 +1,27 @@
+<section>
+  <p *ngIf="error !== ''">{{ error }}</p>
+  <app-addtask></app-addtask>
+  <div class="container">
+    <div *ngIf="items.length !== 0"> 
+      <div *ngFor="let item of items">
+        <mat-checkbox class="example-margin" [checked]="item.checked"></mat-checkbox>
+        {{ item.text }}
+        <button mat-raised-button color="primary" (click)="editFunc()">Редагувати</button>
+        <button mat-raised-button color="primary" (click)="saveFunc()">Зберегти</button>
+        <button mat-raised-button color="primary" (click)="deleteFunc()">Видалити</button>
+      </div>
+    </div>
+  </div>
+  <mat-paginator #paginator
+               class="demo-paginator"
+               (page)="handlePageEvent($event)"
+               [length]="length"
+               [pageSize]="pageSize"
+               [disabled]="disabled"
+               [showFirstLastButtons]="showFirstLastButtons"
+               [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+               [hidePageSize]="hidePageSize"
+               [pageIndex]="pageIndex"
+               aria-label="Select page">
+</mat-paginator>
+</section>
