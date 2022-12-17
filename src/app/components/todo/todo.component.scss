@@ -1,0 +1,27 @@
+:host {
+    width: 600px;
+    margin-left: calc((100vw - 600px) / 2);
+    .container {
+         display: flex;
+            flex-direction: column;
+            gap: 10px;
+        .item {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+        .btns {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .itemField {
+            width: 50%;
+            padding-top: 13px;
+        }
+    }
+}
+.checked{
+    text-decoration: line-through;
+}

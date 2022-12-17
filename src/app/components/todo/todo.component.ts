@@ -5,7 +5,6 @@ import instance from 'src/shared/requests';
 import { map } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
-
 interface ItemsResponseInterface {
   items: Item[];
 }
@@ -22,14 +21,13 @@ type Item = {
 export class TodoComponent {
   httpOptions = instance();
   error?: string;
-  items: Item[] = []; 
+  items: Item[] = [];
 
-  
-  length: number=this.items.length;
+  //length: number=this.items.length;
   pageSize = 5;
   pageIndex = 0;
   pageSizeOptions: number[] = [5, 10];
-  pageEvent: PageEvent;
+  pageEvent: PageEvent = new PageEvent();
   hidePageSize = false;
   showPageSizeOptions = true;
   showFirstLastButtons = true;
@@ -37,16 +35,12 @@ export class TodoComponent {
 
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
-     this.length = this.items.length;
+    //this.length = this.items.length;
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
   }
- 
 
-  constructor(private http: HttpClient) {
-    
-  }
-  
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.getItems();
@@ -64,19 +58,14 @@ export class TodoComponent {
       .subscribe({
         next: (data) => {
           this.items = data.items;
-          
         },
         error: (e) => {
-          this.error = 'Server error +${e.message}';
+         // this.error = 'Server error +${e.message}';
         },
       });
   }
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    this.pageSizeOptions = setPageSizeOptionsInput
-      .split(',')
-      .map((str) => +str);
-  }
-  
+ 
+
   editFunc(): void {}
   saveFunc(): void {}
   deleteFunc(): void {}

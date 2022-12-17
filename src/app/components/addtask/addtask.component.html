@@ -1,10 +1,12 @@
- <p *ngIf="error!==''">{{error}}</p>
- <mat-form-field class="example-full-width">
-        
-        <input matInput type="text" [(ngModel)]="text">
-      </mat-form-field>
-    <div class="button-wrap">
-        <button mat-raised-button color="primary" (click)="addTaskFunc()">Додати задачу</button>
-     </div>
-     <p>{{text}}</p>
-
+<p *ngIf="error !== ''">{{ error }}</p>
+<div class="addDiv">
+  <mat-form-field class="example-full-width">
+    <input matInput type="text" [(ngModel)]="text" />
+  </mat-form-field>
+  <div class="button-wrap">
+    <button mat-raised-button color="primary" (click)="addTaskFunc()">
+      Додати задачу
+    </button>
+  </div>
+</div>
+<p>{{ text }}</p>

@@ -9,7 +9,7 @@ interface LogoutResInterface {
     token: string;
     activeID: string;
     ok: boolean;
-    arror?: string;
+    error?: string;
   }
 @Component({
   selector: 'app-header',

@@ -11,6 +11,9 @@ export class AddtaskComponent {
   addTaskFunc(): void{
     if (this.text === "") {
       this.error = "Введіть назву задачі";
+       setTimeout(() => {
+         this.error = '';
+       }, 3000);
       return;
    }
   }

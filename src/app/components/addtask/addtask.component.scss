@@ -1,0 +1,13 @@
+.addDiv {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+
+justify-content: space-between;
+    
+    .example-full-width {
+        width: 75%;
+        height: 55px;
+        
+    }
+}

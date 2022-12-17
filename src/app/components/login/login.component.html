@@ -1,14 +1,16 @@
-<div>
-    <p *ngIf="error!==''">{{error}}</p>
-    <mat-form-field class="example-full-width">
-        <mat-label>Логін</mat-label>
-        <input matInput type="text" [(ngModel)]="login">
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <mat-label>Пароль</mat-label>
-        <input matInput type="password" [(ngModel)]="pass">
-      </mat-form-field>
-    <div class="button-wrap">
-        <button mat-raised-button color="primary" (click)="loginFunc()">Логін</button>
-     </div>
+<div class="loginDiv">
+  <p *ngIf="error !== ''">{{ error }}</p>
+  <mat-form-field class="example-full-width">
+    <mat-label>Логін</mat-label>
+    <input matInput type="text" [(ngModel)]="login" />
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Пароль</mat-label>
+    <input matInput type="password" [(ngModel)]="pass" />
+  </mat-form-field>
+  <div class="button-wrap">
+    <button mat-raised-button color="primary" (click)="loginFunc()">
+      Логін
+    </button>
+  </div>
 </div>

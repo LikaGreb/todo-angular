@@ -1,4 +1,7 @@
 .container{
     display: flex;
-    justify-content: center;
+    
+    button{
+margin-left: calc(80vw - 30px);
+    }
 }
