@@ -11,7 +11,7 @@
           )
         "
       >
-        <mat-checkbox [checked]="item.checked" ></mat-checkbox>
+        <mat-checkbox (change)="changeFunc(item.id, item.checked)" [checked]="item.checked" ></mat-checkbox>
         <p class="itemField" >{{ item.text }}</p>
         <div class="btns">
           <button mat-raised-button color="warn" (click)="editFunc()">
@@ -20,7 +20,7 @@
           <button mat-raised-button color="accent" (click)="saveFunc()">
             Зберегти
           </button>
-          <button mat-raised-button color="primary" (click)="deleteFunc()">
+          <button mat-raised-button color="primary" (click)="deleteFunc(item.id)">
             Видалити
           </button>
         </div>

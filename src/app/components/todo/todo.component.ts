@@ -4,10 +4,9 @@ import { environment } from 'src/environments/envirinment';
 import instance from 'src/shared/requests';
 import { map } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { TodoService } from 'src/services/todo.service';
 
-interface ItemsResponseInterface {
-  items: Item[];
-}
+
 type Item = {
   text: string;
   id: string;
@@ -23,7 +22,6 @@ export class TodoComponent {
   error?: string;
   items: Item[] = [];
 
-  //length: number=this.items.length;
   pageSize = 5;
   pageIndex = 0;
   pageSizeOptions: number[] = [5, 10];
@@ -40,33 +38,43 @@ export class TodoComponent {
     this.pageIndex = e.pageIndex;
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private service: TodoService) {}
 
   ngOnInit() {
     this.getItems();
   }
 
-  getItems(): void {
-    const url = `${environment.apiUrl}/router?action=getItems`;
-    this.http
-      .post<ItemsResponseInterface>(
-        url,
-        { activeID: localStorage.getItem('activeID') },
-        this.httpOptions
-      )
-      .pipe(map((data) => data))
-      .subscribe({
-        next: (data) => {
-          this.items = data.items;
-        },
-        error: (e) => {
-         // this.error = 'Server error +${e.message}';
-        },
-      });
+  async getItems(): Promise<void> {
+    const data = await this.service.getItems();
+    if (data.error) {
+      this.error = data.error + 'Не знайдено токен';
+      return;
+    }
+    this.items = data.items;
   }
- 
 
   editFunc(): void {}
-  saveFunc(): void {}
-  deleteFunc(): void {}
+  saveFunc(): void { }
+  
+  async deleteFunc(id: string): Promise<void> {
+    const data = await this.service.deleteItem(id);
+    if (data.error || !data.ok) {
+      this.error = data.error || 'Невідома помилка';
+      return;
+    }
+    this.getItems();
+  }
+  async changeFunc(id: string, checked: boolean): Promise<void> {
+    const text = this.items.find((item) => item.id === id)?.text;
+    if (!text) {
+      this.error = 'Запис з таким id не знайдено ';
+      return;
+    }
+    const data = await this.service.changeItem(id, !checked, text);
+    if (data.error || !data.ok) {
+      this.error = data.error || 'Невідома помилка';
+      return;
+    }
+    this.getItems();
+  }
 }
