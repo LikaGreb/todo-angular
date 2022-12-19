@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/envirinment';
+
 import { ItemAddResponseInterface, ItemDeleteResponseInterface, ItemsResponseInterface } from 'src/interfaces/todo.interface';
-import instance from 'src/shared/request';
+import instance from 'src/shared/requests';
+
 
 @Injectable({
   providedIn: 'root',
