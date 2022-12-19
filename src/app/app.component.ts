@@ -23,7 +23,7 @@ export class AppComponent {
     if (this.viewChild) {
       if (localStorage.getItem('activeID')) {
         this.isAuth = true;
-        return;
+        this.logout=false;
       }
     }
     if (this.logout) {

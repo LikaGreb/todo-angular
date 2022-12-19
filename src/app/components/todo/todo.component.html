@@ -2,7 +2,7 @@
   <p *ngIf="error !== ''">{{ error }}</p>
   <app-addtask></app-addtask>
   <div class="container">
-    <div *ngIf="items.length !== 0" >
+    <div *ngIf="items.length !== 0">
       <div class="item"
         *ngFor="
           let item of items.slice(
@@ -10,14 +10,18 @@
             pageSize * (pageIndex + 1)
           )
         "
-      >
+        cdkDrag>
         <mat-checkbox (change)="changeFunc(item.id, item.checked)" [checked]="item.checked" ></mat-checkbox>
-        <p class="itemField" >{{ item.text }}</p>
+        <p class="itemField"  *ngIf="editID!==item.id" [class.checked]="item.checked" >{{ item.text }}</p>
+        <mat-form-field class="example-full-width" *ngIf="editID===item.id">
+          <input matInput type="text" (editTask)="(editTask)" value="{{item.text}}" (change)="changeHandler($event)"
+            (keyup)="keyHandler($event, item.checked)" />
+        </mat-form-field>
         <div class="btns">
-          <button mat-raised-button color="warn" (click)="editFunc()">
+          <button mat-raised-button color="warn" (click)="editFunc(item.id)">
             Редагувати
           </button>
-          <button mat-raised-button color="accent" (click)="saveFunc()">
+          <button mat-raised-button color="accent" (click)="saveFunc(item.checked)">
             Зберегти
           </button>
           <button mat-raised-button color="primary" (click)="deleteFunc(item.id)">
