@@ -8,12 +8,12 @@ import { AuthComponent } from './components/auth/auth.component';
 })
 export class AppComponent {
   @Input() logout = false;
-  isLogout: boolean = false;
   isAuth = !!localStorage.getItem('token');
   @ViewChild(AuthComponent)
   viewChild!: AuthComponent;
   ngOnInit() {}
-  ngDoCheck() { }
+  ngDoCheck() {}
+
   ngAfterContentChecked() {
     if (this.viewChild) {
       if (localStorage.getItem('activeID')) {

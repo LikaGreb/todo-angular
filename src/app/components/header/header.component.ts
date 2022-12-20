@@ -8,7 +8,7 @@ import instance from 'src/shared/requests';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  @Input() checkLogout = false;
+  @Input() checkLogout = localStorage.getItem('token') ? false : true;
   @Input() isAuth = true;
   @Output() checkLogoutChange = new EventEmitter<boolean>();
   httpOptions = instance();
@@ -19,10 +19,9 @@ export class HeaderComponent {
   async logoutFunc(): Promise<void> {
     const data = await this.service.logout();
     if (data.ok === true) {
-      this.isAuth = false;
+      this.checkLogout = true;
       this.checkLogoutChange.emit(this.checkLogout);
       localStorage.clear();
-      console.log(data, 'data', this.isAuth, 'isAuth');
       return;
     }
     this.error = data.error || 'Помилка невідома';

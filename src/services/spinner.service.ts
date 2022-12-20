@@ -8,10 +8,8 @@ export class SpinnerService {
   constructor() {}
   setLoading(Loading: boolean) {
     this.loading = Loading;
-    console.log(this.loading, 'setloading');
   }
   getLoading(): boolean {
-    console.log(this.loading, 'loading');
     return this.loading;
   }
 }

@@ -2,7 +2,12 @@
   <div class="container">
     <p *ngIf="error !== ''">{{ error }}</p>
     <div class="button-wrap">
-      <button mat-raised-button color="primary" (click)="logoutFunc()">
+      <button
+        *ngIf="!checkLogout"
+        mat-raised-button
+        color="primary"
+        (click)="logoutFunc()"
+      >
         Вийти
       </button>
     </div>

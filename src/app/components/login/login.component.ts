@@ -38,4 +38,10 @@ export class LoginComponent {
       return;
     }
   }
+  
+  async keyHandler(event: KeyboardEvent, pass:string): Promise<void> {
+    if (event.key === 'Enter') {
+      await this.loginFunc();
+    }
+  }
 }

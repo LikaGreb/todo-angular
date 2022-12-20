@@ -77,13 +77,11 @@ export class AuthService {
       const url = `${environment.apiUrl}/router?action=logout`;
       const sourse$ = this.http.post<LogoutResInterface>(
         url,
-
         this.httpOptions
       );
       const res = await lastValueFrom(sourse$);
       if (res.ok) {
-        console.log(res);
-        return res;
+          return res;
       }
       return {
         ok: false,

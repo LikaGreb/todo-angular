@@ -6,7 +6,8 @@
   </mat-form-field>
   <mat-form-field class="example-full-width">
     <mat-label>Пароль</mat-label>
-    <input matInput type="password" [(ngModel)]="pass" />
+    <input matInput type="password" [(ngModel)]="pass" 
+              (keyup)="keyHandler($event, pass)"/>
   </mat-form-field>
   <div class="button-wrap">
     <button mat-raised-button color="primary" (click)="loginFunc()">
