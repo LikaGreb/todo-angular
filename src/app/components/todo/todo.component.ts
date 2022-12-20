@@ -1,10 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
-import { environment } from 'src/environments/envirinment';
 import instance from 'src/shared/requests';
-import { map } from 'rxjs';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 import { TodoService } from 'src/services/todo.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 type Item = {
   text: string;
@@ -42,7 +40,6 @@ export class TodoComponent {
   
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
-    //this.length = this.items.length;
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
   }
@@ -111,7 +108,7 @@ export class TodoComponent {
     }
   }
 
-  // drop(event: CdkDragDrop<Item[]>) {
-  //   moveItemInArray(this.items, event.previousIndex, event.currentIndex);
-  // }
+  drop(event: CdkDragDrop<Item[]>) {
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+  }
 }

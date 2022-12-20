@@ -13,6 +13,7 @@ export class AppComponent {
   @ViewChild(AuthComponent)
   viewChild!: AuthComponent;
   ngOnInit() {}
+  ngDoCheck() { }
   ngAfterContentChecked() {
     if (this.viewChild) {
       if (localStorage.getItem('activeID')) {

@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TodoService } from 'src/services/todo.service';
 
-
 type Item = {
   text: string;
   id: string;
@@ -34,9 +33,7 @@ export class AddtaskComponent {
       return;
     }
     this.addItem = true;
-    this.addItemChange.emit(this.addItem)
+    this.addItemChange.emit(this.addItem);
+    this.newTask = '';
   }
-  
-  
 }
-

@@ -12,7 +12,7 @@
         "
         cdkDrag>
         <mat-checkbox (change)="changeFunc(item.id, item.checked)" [checked]="item.checked" ></mat-checkbox>
-        <p class="itemField"  *ngIf="editID!==item.id" [class.checked]="item.checked" >{{ item.text }}</p>
+        <div class="itemField"  *ngIf="editID!==item.id" [class.checked]="item.checked" >{{ item.text }}</div>
         <mat-form-field class="example-full-width" *ngIf="editID===item.id">
           <input matInput type="text" (editTask)="(editTask)" value="{{item.text}}" (change)="changeHandler($event)"
             (keyup)="keyHandler($event, item.checked)" />

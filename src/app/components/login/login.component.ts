@@ -1,8 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
-import { environment } from 'src/environments/envirinment';
 import instance from 'src/shared/requests';
-import { map } from 'rxjs';
 import { AuthService } from 'src/services/auth.service';
 
 interface LoginResInterface {

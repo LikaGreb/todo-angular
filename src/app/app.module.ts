@@ -15,10 +15,14 @@ import { RegComponent } from './components/reg/reg.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AddtaskComponent } from './components/addtask/addtask.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SpinnerInterceptor } from 'src/interseptor/spinner.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     LoginComponent,
     RegComponent,
     AddtaskComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,8 +48,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     HttpClientModule,
     MatCheckboxModule,
     MatPaginatorModule,
+    DragDropModule,
+    MatProgressSpinnerModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
