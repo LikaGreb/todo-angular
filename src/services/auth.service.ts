@@ -10,7 +10,6 @@ import {
 } from 'src/interfaces/auth.interface';
 import instance from 'src/shared/requests';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -30,7 +29,6 @@ export class AuthService {
       if (data.token && data.activeID) {
         localStorage.setItem('token', data.token);
         localStorage.setItem('activeID', data.activeID);
-
         return data;
       }
       return {
@@ -84,6 +82,7 @@ export class AuthService {
       );
       const res = await lastValueFrom(sourse$);
       if (res.ok) {
+        console.log(res);
         return res;
       }
       return {
@@ -91,10 +90,10 @@ export class AuthService {
         error: `Не розлогінились`,
       };
     } catch (e: any) {
-      return{
-      ok: false,
-      error: `Помилка сервера + ${e.message}`,
-      }
+      return {
+        ok: false,
+        error: `Помилка сервера + ${e.message}`,
+      };
     }
   }
 }
