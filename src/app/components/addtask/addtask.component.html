@@ -1,7 +1,7 @@
 <p *ngIf="error !== ''">{{ error }}</p>
 <div class="addDiv">
   <mat-form-field class="example-full-width">
-    <input matInput type="text" [(ngModel)]="text" />
+    <input matInput type="text" [(ngModel)]="newTask" value="newTask" />
   </mat-form-field>
   <div class="button-wrap">
     <button mat-raised-button color="primary" (click)="addTaskFunc()">
@@ -9,4 +9,4 @@
     </button>
   </div>
 </div>
-<p>{{ text }}</p>
+

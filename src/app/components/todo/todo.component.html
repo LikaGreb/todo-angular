@@ -1,6 +1,6 @@
 <section>
   <p *ngIf="error !== ''">{{ error }}</p>
-  <app-addtask></app-addtask>
+  <app-addtask [(addItem)]="isAddItem"></app-addtask>
   <div class="container">
     <div *ngIf="items.length !== 0">
       <div class="item"

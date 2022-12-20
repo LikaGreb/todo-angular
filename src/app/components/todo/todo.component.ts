@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { environment } from 'src/environments/envirinment';
 import instance from 'src/shared/requests';
 import { map } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { TodoService } from 'src/services/todo.service';
-
 
 type Item = {
   text: string;
@@ -21,9 +20,10 @@ export class TodoComponent {
   httpOptions = instance();
   error?: string;
   items: Item[] = [];
-newTask="";
-editID="";
-editTask="";
+  newTask = '';
+  editID = '';
+  editTask = '';
+  @Input() isAddItem = false;
   pageSize = 5;
   pageIndex = 0;
   pageSizeOptions: number[] = [5, 10];
@@ -33,6 +33,13 @@ editTask="";
   showFirstLastButtons = true;
   disabled = false;
 
+  ngDoCheck() {
+    if (this.isAddItem) {
+      this.getItems();
+    }
+    this.isAddItem = false;
+  }
+  
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
     //this.length = this.items.length;
@@ -56,17 +63,21 @@ editTask="";
   }
 
   async saveFunc(checked: boolean): Promise<void> {
-    const data = await this.service.changeItem(this.editID, checked, this.editTask);
+    const data = await this.service.changeItem(
+      this.editID,
+      checked,
+      this.editTask
+    );
     if (data.error || !data.ok) {
-      this.error = data.error || "Невідома помилка";
+      this.error = data.error || 'Невідома помилка';
       return;
     }
     this.getItems();
-    this.newTask = "";
-    this.editID = "";
-    this.editTask = "";
+    this.newTask = '';
+    this.editID = '';
+    this.editTask = '';
   }
-  
+
   async deleteFunc(id: string): Promise<void> {
     const data = await this.service.deleteItem(id);
     if (data.error || !data.ok) {
@@ -76,14 +87,14 @@ editTask="";
     this.getItems();
   }
   async changeFunc(id: string, checked: boolean): Promise<void> {
-    const text = this.items.find(item => item.id === id)?.text;
+    const text = this.items.find((item) => item.id === id)?.text;
     if (!text) {
-      this.error = "Запис з таким id не знайдено "
+      this.error = 'Запис з таким id не знайдено ';
       return;
     }
     const data = await this.service.changeItem(id, !checked, text);
     if (data.error || !data.ok) {
-      this.error = data.error || "Невідома помилка";
+      this.error = data.error || 'Невідома помилка';
       return;
     }
     this.getItems();
@@ -95,8 +106,8 @@ editTask="";
     this.editID = id;
   }
   async keyHandler(event: KeyboardEvent, checked: boolean): Promise<void> {
-    if (event.key === "Enter") {
-      await this.saveFunc(checked)
+    if (event.key === 'Enter') {
+      await this.saveFunc(checked);
     }
   }
 
